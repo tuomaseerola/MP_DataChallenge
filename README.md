@@ -4,25 +4,30 @@
 <img src="figures/MP_data_challenge_smaller.png" data-fig-align="left"
 width="200" />
 
-This is an internal training exercise for the Durham Music and Science
-Music Psychology Lab, where all members—working individually or in small
-groups—are invited to develop models that explain data in a reliable and
-robust way. We assume that most participants have a basic understanding
-of statistics and are familiar with constructing linear regression
-models, which serves as the foundation for this task.
+This is an internal training exercise for the *Durham Music and Science*
+*Music Psychology Lab*, where all members—working individually or in
+small groups—are invited to develop models that explain data in a
+reliable and robust way. We assume that most participants have a basic
+understanding of statistics and are familiar with constructing
+regression models, which serves as the foundation for this task.
 
-To make the exercise more challenging and promote the learning of better
-modeling principles, we have built in some inherent obstacles: (1) we
-have an abundance of data, particularly predictors, (2) we lack a
-guiding theory to form our assumptions, and (3) we want the analyses to
-be transparent (notebooks or sets of codes that can run independently).
+To make the exercise more challenging and promote the acquiring better
+modeling principles, I have built in some inherent challenges to the
+task:
+
+1.  We have an abundance of data, particularly predictors
+2.  We lack a guiding theory to form our assumptions
+3.  We want the analyses to be transparent (notebooks or sets of codes
+    that can run independently)
+
+It would be also desirable to be able to explain what the model does in
+plain language.
 
 ## Present task: Explain emotion ratings using acoustic descriptors
 
-For this task, let’s focus on static ratings (static ratings means that
-there is a single aggregated mean rating for the whole excerpt) using
-static musical features already extracted from music using MIR tools. We
-have a good dataset for this.
+For this task, let’s focus on static ratings (a single aggregated mean
+rating for the whole excerpt) using static musical features already
+extracted from music using MIR tools. We have a good dataset for this.
 
 ### Dataset: PMEmo – A Dataset For Music Emotion Computing
 
@@ -47,10 +52,11 @@ For more details, see paper by [Zhang et al.,
 (2018)](https://doi.org/10.1145/3206025.3206037).
 
 The data allows to explore various aspects of emotion induction,
-including predicting arousal and valence from acoustic features and
-explaining electrodermal activity (EDA) from continuous musical features
-or from lyrics or other data. Let’s start with the easiest task,
-predicting the rated emotions with acoustic features.
+including (a) predicting arousal and valence from acoustic features, (b)
+predicting participants’ electrodermal activity (EDA) from continuous
+musical features, and (c) to explore the impact of lyrics or other data
+on either of these. Let’s start with the easiest task, predicting the
+rated emotions with acoustic features.
 
 #### Loading data
 
@@ -77,16 +83,25 @@ knitr::kable(head(df[,1:7]))
 |       7 |        0.7000 |        0.7250 |                       7.756963 |                       0.9589230 |                               0 |                           3.683783 |
 |       8 |        0.3875 |        0.2250 |                       9.172951 |                       0.5589192 |                               0 |                           3.131285 |
 
+``` r
+print(dim(df))
+```
+
+    [1]  767 6376
+
 In the dataframe `df` we have everything we need for the task, where the
 first column contains the `musicId` and the columns 2 and 3 are the
 arousal and valence mean (ratings) and the rest of the columns are
-individual acoustic features.
+individual acoustic features. Note the size of the dataset, 767 rows
+representing excerpts with 6373 columns representing variables
+(`musicId`,`Arousal.mean.`, `Valence.mean.` and 6371 more columns with
+exotic names related to audio features).
 
 #### Meta-data (not used in this task)
 
-It might be interesting to see the metadata in the `meta` dataframe. If
-you wish to get the audio examples, this data is useful to link up the
-audio and gives the track names and artist and album names. For a
+It might be useful to see the metadata in the `meta` dataframe. If you
+wish to get the audio examples, this data is useful to link up the audio
+and gives the track names and artist and album names. For a
 visualisation, you might want join the two dataframes (`df` and `meta`),
 but for the sake of the task, working with `df` is sufficient.
 
@@ -112,15 +127,15 @@ arousal or valence using all features, and it could be done in R using
 (`lm`) in the following way:
 
 ``` r
-naive_model <- lm(Arousal.mean. ~ ., 
-  data = dplyr::select(df,-musicId,-Valence.mean.)) # discard the columnd that are not needed
-s <- summary(naive_model)
+bad_model <- lm(Arousal.mean. ~ ., 
+  data = dplyr::select(df,-musicId,-Valence.mean.)) # discard unwanted columns
+s <- summary(bad_model)
 print(round(s$r.squared,3))
 ```
 
     [1] 0.999
 
-But this model is *pure nonsense* because it tries to predict 767
+This bad model is *pure nonsense* because it tries to predict 767
 ratings with 6373 predictors, and if you have more predictors than
 observations, you break any modelling assumptions and you will be
 explain all data even with random variables. As we can see, the model is
@@ -129,7 +144,7 @@ observations than predictors and the rule is to have 15 or 20 times more
 observations than predictors.
 
 Just to demonstrate this, here we predict arousal with 770 random
-features, which is equally “good” as the previous silly model.
+features, which is equally “good” as the previous bad model.
 
 ``` r
 n <- nrow(df); reps <- 770; n1 <- 1
@@ -171,6 +186,8 @@ To do the modelling properly, consider some of the following steps:
 6.  Assess the goodness of the model with separate data (the testing
     subset typically serves this purpose)
 
+7.  Explain what explains arousal and valence based on your analysis
+
 There are plenty of guides about how to create models in R and in
 Python, many of them using useful packages designed for building models
 such [`caret` package](https://topepo.github.io/caret/index.html) or
@@ -185,13 +202,13 @@ the exercise, you should be able:
 1.  to show the analytical steps
 2.  to summarise your best model using metrics such as $R^2$
 3.  to explain the model by interpreting the model coefficients
-4.  to tell others what did you learn while doing the exercise (Note
-    that fails are important part of the learning process)
+4.  to tell others what did you learn while doing the exercise (note:
+    fails and dead ends are important part of the learning process)
 
 For the 3rd point, many of the acoustical descriptors might be quite
 difficult to interpret from the labels alone, but you can still explain
 the model principles even if the computation or the meaning of the exact
-feature is not known to us.
+feature may not be easily decipher.
 
 Bonus points for visualising the original ratings and the model
 predictions.
@@ -202,10 +219,10 @@ and produce your analysis in any computer (with the same data and
 packages). This part of the exercise encourages you to build transparent
 models that others will understand and can run.
 
-If you enjoy the task, we could try a more challenging variant related
-to this where we attempt to explain the electodermal activity with
-musical features or bring information from lyrics or metadata to the
-models.
+If you enjoy the task, we could later on try a more challenging variant
+related to this where we attempt to explain the electodermal activity
+with musical features or bring information from lyrics or metadata to
+the models.
 
 <img src="figures/MPL.png" data-fig-align="left" width="160" />
 
