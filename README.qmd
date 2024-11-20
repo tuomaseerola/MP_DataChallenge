@@ -44,9 +44,8 @@ feat <- read.csv('data/static_features.csv',header = TRUE)
 # combine ratings and features (leave metadata out for now)
 df <- merge(anno,feat,by="musicId")
 knitr::kable(head(df[,1:7]))
-print(dim(df))
 ```
-In the dataframe `df` we have everything we need for the task, where the first column contains the `musicId` and the columns 2 and 3 are the arousal and valence mean (ratings) and the rest of the columns are individual acoustic features. Note the size of the dataset, `r nrow(df)` rows representing excerpts with `r dim(df)[2]-3` columns representing variables (`musicId`,`Arousal.mean.`, `Valence.mean.` and `r dim(df)[2]-5` more columns with exotic names related to audio features).
+In the dataframe `df` we have everything we need for the task, where the first column contains the `musicId` and the columns 2 and 3 are the arousal and valence mean (ratings) and the rest of the columns are individual acoustic features. Note the size of the dataset, `r nrow(df)` rows representing excerpts with `r dim(df)[2]` columns representing variables (`musicId`,`Arousal.mean.`, `Valence.mean.` and `r dim(df)[2]-3` more columns with exotic names related to audio features).
 
 #### Meta-data (not used in this task)
 
@@ -96,19 +95,19 @@ To do the modelling properly, consider some of the following steps:
 
 1. Divide the data into training and testing subsets (typically 80%/20%) to avoid overfitting.
 
-3. When building the model, think of normalising your predictors (the predictors contain widely different magnitudes, which could be a problem for interpretation and developing the models.)
+3. When building the model, consider normalising your predictors (the predictors contain widely different magnitudes, which could be a problem for interpretation and developing the models).
 
-4. When building the model with a training subset, consider cross-validation (to avoid overfitting)
+4. When building the model with a training subset, consider cross-validation (to avoid overfitting).
 
-5. Have some kind of feature selection principle (theory, statistical operation, intuition, ...)
+5. Have some kind of feature selection principle (theory, statistical operation, intuition, ...).
 
-6. Try to create as simple a model as possible
+6. Try to create as simple a model as possible.
 
-7. Assess the goodness of the model with separate data (the testing subset typically serves this purpose)
+7. Assess the goodness of the model with separate data (the testing subset typically serves this purpose).
 
-8. Explain what explains arousal and valence based on your analysis
+8. Explain what explains arousal and valence based on your analysis.
 
-There are plenty of guides about how to create models in R and in Python, many of them using useful packages designed for building models such [`caret` package](https://topepo.github.io/caret/index.html) or [`tidymodels`](https://www.tidymodels.org) or other guides such as [YaRrr!](https://bookdown.org/ndphillips/YaRrr/). 
+There are plenty of guides about how to create models in R and in Python, many of them using useful packages designed for building models such [`caret` package](https://topepo.github.io/caret/index.html) or [`tidymodels`](https://www.tidymodels.org) or other guides such as [YaRrr!](https://bookdown.org/ndphillips/YaRrr/). Classic statistics handbooks will give you solid guidance as well (Howell, 2010; Tabachnick et al., 2013), some of which come with R code (Lilja and Linse, 2016; Sheather, 2009; McNulty, 2021).
 
 ## To submit your model
 
@@ -131,5 +130,10 @@ If you enjoy the task, we could later on try a more challenging variant related 
 
 ## References
 
+* Howell, D. C. (2010). _Statistical methods for psychology_. 7th ed.  Wadwsworth, Cengage Learning. 
+* Lilja, D. J. & Linse, G. M. (2022). _Linear regression using R: An introduction to data modeling._  University of Minnesota Libraries Publishing. https://staging.open.umn.edu/opentextbooks/textbooks/linear-regression-using-r-an-introduction-to-data-modeling
+* McNulty, K. (2021). _Handbook of regression modeling in people analytics: With examples in R and Python._  Chapman and Hall/CRC. https://peopleanalytics-regression-book.org/index.html
+* Sheather, S. (2009). _A Modern Approach to Regression with R_. Springer Science & Business Media. https://link.springer.com/book/10.1007/978-0-387-09608-7
+* Tabachnick, B. G., Fidell, L. S., & Osterlind, S. J. (2013). _Using multivariate statistics_. Pearson, Boston, MA. 
 * Zhang, K., Zhang, H., Li, S., Yang, C., & Sun, L. (2018). The PMEmo dataset for music emotion recognition. _Proceedings of the 2018 ACM on International Conference on Multimedia Retrieval_, 135–142. [https://doi.org/10.1145/3206025.3206037](https://doi.org/10.1145/3206025.3206037)
 

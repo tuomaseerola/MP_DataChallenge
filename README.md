@@ -83,18 +83,12 @@ knitr::kable(head(df[,1:7]))
 |       7 |        0.7000 |        0.7250 |                       7.756963 |                       0.9589230 |                               0 |                           3.683783 |
 |       8 |        0.3875 |        0.2250 |                       9.172951 |                       0.5589192 |                               0 |                           3.131285 |
 
-``` r
-print(dim(df))
-```
-
-    [1]  767 6376
-
 In the dataframe `df` we have everything we need for the task, where the
 first column contains the `musicId` and the columns 2 and 3 are the
 arousal and valence mean (ratings) and the rest of the columns are
 individual acoustic features. Note the size of the dataset, 767 rows
-representing excerpts with 6373 columns representing variables
-(`musicId`,`Arousal.mean.`, `Valence.mean.` and 6371 more columns with
+representing excerpts with 6376 columns representing variables
+(`musicId`,`Arousal.mean.`, `Valence.mean.` and 6373 more columns with
 exotic names related to audio features).
 
 #### Meta-data (not used in this task)
@@ -171,28 +165,31 @@ To do the modelling properly, consider some of the following steps:
 1.  Divide the data into training and testing subsets (typically
     80%/20%) to avoid overfitting.
 
-2.  When building the model, think of normalising your predictors (the
+2.  When building the model, consider normalising your predictors (the
     predictors contain widely different magnitudes, which could be a
-    problem for interpretation and developing the models.)
+    problem for interpretation and developing the models).
 
 3.  When building the model with a training subset, consider
-    cross-validation (to avoid overfitting)
+    cross-validation (to avoid overfitting).
 
 4.  Have some kind of feature selection principle (theory, statistical
-    operation, intuition, …)
+    operation, intuition, …).
 
-5.  Try to create as simple a model as possible
+5.  Try to create as simple a model as possible.
 
 6.  Assess the goodness of the model with separate data (the testing
-    subset typically serves this purpose)
+    subset typically serves this purpose).
 
-7.  Explain what explains arousal and valence based on your analysis
+7.  Explain what explains arousal and valence based on your analysis.
 
 There are plenty of guides about how to create models in R and in
 Python, many of them using useful packages designed for building models
 such [`caret` package](https://topepo.github.io/caret/index.html) or
 [`tidymodels`](https://www.tidymodels.org) or other guides such as
-[YaRrr!](https://bookdown.org/ndphillips/YaRrr/).
+[YaRrr!](https://bookdown.org/ndphillips/YaRrr/). Classic statistics
+handbooks will give you solid guidance as well (Howell, 2010; Tabachnick
+et al., 2013), some of which come with R code (Lilja and Linse, 2016;
+Sheather, 2009; McNulty, 2021).
 
 ## To submit your model
 
@@ -228,6 +225,20 @@ the models.
 
 ## References
 
+- Howell, D. C. (2010). *Statistical methods for psychology*. 7th
+  ed. Wadwsworth, Cengage Learning.
+- Lilja, D. J. & Linse, G. M. (2022). *Linear regression using R: An
+  introduction to data modeling.* University of Minnesota Libraries
+  Publishing.
+  https://staging.open.umn.edu/opentextbooks/textbooks/linear-regression-using-r-an-introduction-to-data-modeling
+- McNulty, K. (2021). *Handbook of regression modeling in people
+  analytics: With examples in R and Python.* Chapman and Hall/CRC.
+  https://peopleanalytics-regression-book.org/index.html
+- Sheather, S. (2009). *A Modern Approach to Regression with R*.
+  Springer Science & Business Media.
+  https://link.springer.com/book/10.1007/978-0-387-09608-7
+- Tabachnick, B. G., Fidell, L. S., & Osterlind, S. J. (2013). *Using
+  multivariate statistics*. Pearson, Boston, MA.
 - Zhang, K., Zhang, H., Li, S., Yang, C., & Sun, L. (2018). The PMEmo
   dataset for music emotion recognition. *Proceedings of the 2018 ACM on
   International Conference on Multimedia Retrieval*, 135–142.
