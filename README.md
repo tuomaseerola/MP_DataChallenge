@@ -4,6 +4,8 @@
 <img src="figures/MP_data_challenge_smaller.png" data-fig-align="left"
 width="200" />
 
+# Music Psychology Data Challenge 1
+
 This is an internal training exercise for the *Durham Music and Science*
 *Music Psychology Lab*, where all members—working individually or in
 small groups—are invited to develop models that explain data in a
@@ -23,7 +25,7 @@ task:
 It would be also desirable to be able to explain what the model does in
 plain language.
 
-## Present task: Explain emotion ratings using acoustic descriptors
+## Explain emotion ratings using acoustic descriptors
 
 For this task, let’s focus on static ratings (a single aggregated mean
 rating for the whole excerpt) using static musical features already
@@ -75,13 +77,13 @@ knitr::kable(head(df[,1:7]))
 ```
 
 | musicId | Arousal.mean. | Valence.mean. | audspec_lengthL1norm_sma_range | audspec_lengthL1norm_sma_maxPos | audspec_lengthL1norm_sma_minPos | audspec_lengthL1norm_sma_quartile1 |
-|--------:|--------------:|--------------:|-------------------------------:|--------------------------------:|--------------------------------:|-----------------------------------:|
-|       1 |        0.4000 |        0.5750 |                       7.318236 |                       0.7164319 |                               0 |                           2.245124 |
-|       4 |        0.2625 |        0.2875 |                       6.558082 |                       0.7033989 |                               0 |                           1.606873 |
-|       5 |        0.1500 |        0.2000 |                       8.152512 |                       0.3680324 |                               0 |                           1.404577 |
-|       6 |        0.5125 |        0.3500 |                       8.527122 |                       0.2817285 |                               0 |                           2.106767 |
-|       7 |        0.7000 |        0.7250 |                       7.756963 |                       0.9589230 |                               0 |                           3.683783 |
-|       8 |        0.3875 |        0.2250 |                       9.172951 |                       0.5589192 |                               0 |                           3.131285 |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 0.4000 | 0.5750 | 7.318236 | 0.7164319 | 0 | 2.245124 |
+| 4 | 0.2625 | 0.2875 | 6.558082 | 0.7033989 | 0 | 1.606873 |
+| 5 | 0.1500 | 0.2000 | 8.152512 | 0.3680324 | 0 | 1.404577 |
+| 6 | 0.5125 | 0.3500 | 8.527122 | 0.2817285 | 0 | 2.106767 |
+| 7 | 0.7000 | 0.7250 | 7.756963 | 0.9589230 | 0 | 3.683783 |
+| 8 | 0.3875 | 0.2250 | 9.172951 | 0.5589192 | 0 | 3.131285 |
 
 In the dataframe `df` we have everything we need for the task, where the
 first column contains the `musicId` and the columns 2 and 3 are the
@@ -105,14 +107,14 @@ meta <- read.csv('data/metadata.csv',header = TRUE)
 knitr::kable(head(meta))
 ```
 
-| musicId | fileName | title                  | artist              | album                                             | duration | chorus_start_time | chorus_end_time |
-|--------:|:---------|:-----------------------|:--------------------|:--------------------------------------------------|---------:|:------------------|:----------------|
-|       1 | 1.mp3    | Good Drank             | 2 Chainz            | Def Jam Presents: Direct Deposit, Vol. 2          |    32.10 | 02:35             | 03:05           |
-|       4 | 4.mp3    | X Bitch (feat. Future) | 21 Savage           | Savage Mode                                       |    28.09 | 03:00             | 03:26           |
-|       5 | 5.mp3    | No Heart               | 21 Savage           | Savage Mode                                       |    84.23 | 00:41             | 02:03           |
-|       6 | 6.mp3    | Red Opps               | 21 Savage           | Red Opps                                          |    29.53 | 02:16             | 02:44           |
-|       7 | 7.mp3    | Girls Talk Boys        | 5 Seconds Of Summer | Ghostbusters (Original Motion Picture Soundtrack) |    29.11 | 02:30             | 02:57           |
-|       8 | 8.mp3    | PRBLMS                 | 6LACK               | FREE 6LACK                                        |    40.14 | 02:10             | 02:48           |
+| musicId | fileName | title | artist | album | duration | chorus_start_time | chorus_end_time |
+|---:|:---|:---|:---|:---|---:|:---|:---|
+| 1 | 1.mp3 | Good Drank | 2 Chainz | Def Jam Presents: Direct Deposit, Vol. 2 | 32.10 | 02:35 | 03:05 |
+| 4 | 4.mp3 | X Bitch (feat. Future) | 21 Savage | Savage Mode | 28.09 | 03:00 | 03:26 |
+| 5 | 5.mp3 | No Heart | 21 Savage | Savage Mode | 84.23 | 00:41 | 02:03 |
+| 6 | 6.mp3 | Red Opps | 21 Savage | Red Opps | 29.53 | 02:16 | 02:44 |
+| 7 | 7.mp3 | Girls Talk Boys | 5 Seconds Of Summer | Ghostbusters (Original Motion Picture Soundtrack) | 29.11 | 02:30 | 02:57 |
+| 8 | 8.mp3 | PRBLMS | 6LACK | FREE 6LACK | 40.14 | 02:10 | 02:48 |
 
 ### Building a bad model
 
@@ -221,24 +223,132 @@ related to this where we attempt to explain the electodermal activity
 with musical features or bring information from lyrics or metadata to
 the models.
 
-<img src="figures/MPL.png" data-fig-align="left" width="160" />
+<img src="figures/MPL.png" data-fig-align="left" width="160" /> \###
+Postscriptum: Winner of the Challenge 1
+
+**Wei Wu** developed a mature modelling approach for this challenge,
+where he took those features that correlated with the ratings and
+reduced the number of features through principal component analysis
+(PCA). He then used the PCA components to predict the ratings with
+proper cross-validation. All submission managed to do meaningful
+analyses of the data. One of the takeaways was that the model
+development and evaluation needs to be kept separate from the start to
+avoid “peeking”.
+
+# Music Psychology Data Challenge 2
+
+The second music psychology data challenge is about noise and errors.
+How do you diagnose and deal with these?
+
+## Priming data
+
+This dataset is from a priming study, where the participants have done
+quick binary judgements of negative and positive words (as either
+“negative” or “positive”). The words have been presented just after a
+sound stimulus (called “prime” in priming studies), which has been
+either positive or negative (say consonant or dissonant). A long-known
+fact is that processing incongruous stimuli takes more time than
+congruous, so the reaction time gives a window into this process, which
+is not under volitional control. It allows researchers to explore
+whether sound association are truly processed as negative/positive or
+are they just consciously rated so when rated with self-report scales
+(Armitage et al., 2020; Lahdelma et al., 2024).
+
+### Dataset details
+
+This is a simple experiment. Each participants (*N* = 40) made decision
+about word valence in 64 trials (sound primes + word targets). These
+trials consisted of 8 positive and 8 negative words presented either
+congruously with the sound (positive sound and positive word or negative
+sound and negative word) or incongruously (negative sound and positive
+word or positive sound and negative word). The dependent variable is the
+reaction time (`reaction_time`) in milliseconds and the two main
+independent variables are `congruity` (which encodes whether the sound
+and word are either congruous or incongruous) and musical `expertise`
+(musician or non-musician). Some previous literature suggest that
+musicians tend to be more sensitive to these nuances in the sounds.
+
+This is what the data looks like.
+
+``` r
+data <- read.csv('data/MPdata_challenge2_rt_dataset.csv')
+knitr::kable(head(data))
+```
+
+| subject_id | trial_id | expertise | congruity | reaction_time | is_correct | word | sound | word_label |
+|---:|---:|:---|:---|---:|:---|:---|:---|:---|
+| 1 | 1 | Non-musician | congruent | 901.4 | TRUE | Pos | Pos | Pos_1 |
+| 1 | 2 | Non-musician | congruent | 905.5 | TRUE | Pos | Pos | Pos_2 |
+| 1 | 3 | Non-musician | incongruent | 946.7 | FALSE | Pos | Neg | Pos_3 |
+| 1 | 4 | Non-musician | congruent | 957.6 | TRUE | Pos | Pos | Pos_4 |
+| 1 | 5 | Non-musician | congruent | 946.3 | TRUE | Pos | Pos | Pos_5 |
+| 1 | 6 | Non-musician | congruent | 951.1 | TRUE | Pos | Pos | Pos_6 |
+
+There are 2624 observations in the data, which is *not exactly correct*
+when there has been 40 participants each completing 64 trials (40 x 64 =
+2560). So the data has errors and noise on top of the fact that reaction
+times tend to be quite noisy as well.
+
+## Challenge
+
+Was there a statistically significant effect of priming? And what about
+the expertise, was there an expertise difference in the reaction times?
+Before you will be able to run the analysis, you need to have a look at
+the data, and find out any quality issues and decide how to tackle them.
+
+> [!TIP]  
+> \* `expand` function (from `tidyr`) helps you to diagnose (e.g.,
+> `data %>% expand(nesting(congruity, expertise))`). `table` function
+> can also be useful (e.g. `table(data$expertise,data$congruity)`) \*
+> Histograms are useful. \* Reaction time data has a feasible range of
+> values. \* There are 11 different types of errors and noise in the
+> data.
+
+## Solutions
+
+It is all about learning. Again, submit your solutions as Rmarkdown
+notebook, preferably containing a section of **1. Dealing with errors**
+and **2. Analysis results**. In the first part, describe what you do and
+give a rationale of why you remove/alter any observations. You can
+include figures in your solution.
+
+> [!IMPORTANT] If you want to engage with study **preregistrations**
+> in future, you need to specify all these steps (1. what are the steps
+> to data exclusion, 2. what are the preprocessing steps, and 3. what
+> are the specific analysis operations) in advance of the data
+> collection.
 
 ## References
 
+- Armitage, J., Lahdelma, I., Eerola, T., & Ambrazevičius, R. (2023).
+  Culture influences conscious appraisal of, but not automatic aversion
+  to, acoustically rough musical intervals. *Plos One, 18(12)*,
+  e0294645. <https://doi.org/10.1371/journal.pone.0294645>
+
 - Howell, D. C. (2010). *Statistical methods for psychology*. 7th
-  ed. Wadwsworth, Cengage Learning.
+  ed. Wadwsworth, Cengage Learning.
+
+- Lahdelma, I. & Eerola, T. (2024). Valenced Priming with Acquired
+  Affective Concepts in Music: Automatic Reactions to Common Tonal
+  Chords. Music Perception, 41(3), 161-175.
+  <https://doi.org/10.1525/mp.2024.41.3.161>
+
 - Lilja, D. J. & Linse, G. M. (2022). *Linear regression using R: An
   introduction to data modeling.* University of Minnesota Libraries
   Publishing.
   https://staging.open.umn.edu/opentextbooks/textbooks/linear-regression-using-r-an-introduction-to-data-modeling
+
 - McNulty, K. (2021). *Handbook of regression modeling in people
   analytics: With examples in R and Python.* Chapman and Hall/CRC.
   https://peopleanalytics-regression-book.org/index.html
+
 - Sheather, S. (2009). *A Modern Approach to Regression with R*.
   Springer Science & Business Media.
   https://link.springer.com/book/10.1007/978-0-387-09608-7
+
 - Tabachnick, B. G., Fidell, L. S., & Osterlind, S. J. (2013). *Using
   multivariate statistics*. Pearson, Boston, MA.
+
 - Zhang, K., Zhang, H., Li, S., Yang, C., & Sun, L. (2018). The PMEmo
   dataset for music emotion recognition. *Proceedings of the 2018 ACM on
   International Conference on Multimedia Retrieval*, 135–142.

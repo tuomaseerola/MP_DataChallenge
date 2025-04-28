@@ -5,6 +5,8 @@ format: gfm
 
 ![](figures/MP_data_challenge_smaller.png){width=200 fig-align="left"}
 
+# Music Psychology Data Challenge 1
+
 This is an internal training exercise for the _Durham Music and Science_ _Music Psychology Lab_, where all members—working individually or in small groups—are invited to develop models that explain data in a reliable and robust way. We assume that most participants have a basic understanding of statistics and are familiar with constructing regression models, which serves as the foundation for this task.
 
 To make the exercise more challenging and promote the acquiring better modeling principles, I have built in some inherent challenges to the task: 
@@ -15,7 +17,7 @@ To make the exercise more challenging and promote the acquiring better modeling 
 
 It would be also desirable to be able to explain what the model does in plain language.
 
-## Present task: Explain emotion ratings using acoustic descriptors
+## Explain emotion ratings using acoustic descriptors
 
 For this task, let's focus on static ratings (a single aggregated mean rating for the whole excerpt) using static musical features already extracted from music using MIR tools. We have a good dataset for this.
 
@@ -127,10 +129,57 @@ We want the outcome to be shared as a notebook/document (_Rmarkdown_, _Quarto_, 
 If you enjoy the task, we could later on try a more challenging variant related to this where we attempt to explain the electodermal activity with musical features or bring information from lyrics or metadata to the models.
 
 ![](figures/MPL.png){width=160 fig-align="left"}
+### Postscriptum: Winner of the Challenge 1
+
+**Wei Wu** developed a mature modelling approach for this challenge, where he took those features that correlated with the ratings and reduced the number of features through principal component analysis (PCA). He then used the PCA components to predict the ratings with proper cross-validation. All submission managed to do meaningful analyses of the data. One of the takeaways was that the model development and evaluation needs to be kept separate from the start to avoid "peeking". 
+
+# Music Psychology Data Challenge 2
+
+The second music psychology data challenge is about noise and errors. How do you diagnose and deal with these?
+
+## Priming data
+
+This dataset is from a priming study, where the participants have done quick binary judgements of negative and positive words (as either "negative" or "positive"). The words have been presented just after a sound stimulus (called "prime" in priming studies), which has been either positive or negative (say consonant or dissonant). A long-known fact is that processing incongruous stimuli takes more time than congruous, so the reaction time gives a window into this process, which is not under volitional control. It allows researchers to explore whether sound association are truly processed as negative/positive or are they just consciously rated so when rated with self-report scales (Armitage et al., 2020; Lahdelma et al., 2024).
+
+### Dataset details
+
+This is a simple experiment. Each participants (_N_ = 40) made decision about word valence in 64 trials (sound primes + word targets). These trials consisted of 8 positive and 8 negative words presented either congruously with the sound (positive sound and positive word or negative sound and negative word) or incongruously (negative sound and positive word or positive sound and negative word). The dependent variable is the reaction time (`reaction_time`) in milliseconds and the two main independent variables are `congruity` (which encodes whether the sound and word are either congruous or incongruous) and musical `expertise` (musician or non-musician). Some previous literature suggest that musicians tend to be more sensitive to these nuances in the sounds.
+
+This is what the data looks like. 
+```{r}
+#| id: load-data
+#| echo: true
+#| output: asis
+data <- read.csv('data/MPdata_challenge2_rt_dataset.csv')
+knitr::kable(head(data))
+```
+There are `{r} nrow(data)` observations in the data, which is _not exactly correct_ when there has been 40 participants each completing 64 trials (40 x 64 = `{r} 40 * 64`). So the data has errors and noise on top of the fact that reaction times tend to be quite noisy as well.
+
+## Challenge
+
+Was there a statistically significant effect of priming? And what about the expertise, was there an expertise difference in the reaction times? Before you will be able to run the analysis, you need to have a look at the data, and find out any quality issues and decide how to tackle them.
+
+> [!TIP]  
+> * `expand` function (from `tidyr`) helps you to diagnose (e.g., `data %>% expand(nesting(congruity, expertise))`). `table` function can also be useful (e.g. `table(data$expertise,data$congruity)`) 
+> * Histograms are useful.
+> * Reaction time data has a feasible range of values.
+> * There are 11 different types of errors and noise in the data.
+
+## Solutions
+
+It is all about learning. Again, submit your solutions as Rmarkdown notebook, preferably containing a section of **1. Dealing with errors** and **2. Analysis results**. In the first part, describe what you do and give a rationale of why you remove/alter any observations. You can include figures in your solution.  
+
+> [!IMPORTANT] 
+> If you want to engage with study **preregistrations** in future, you need to specify all these steps (1. what are the steps to data exclusion, 2. what are the preprocessing steps, and 3. what are the specific analysis operations) in advance of the data collection. 
+
 
 ## References
 
+* Armitage, J., Lahdelma, I., Eerola, T., & Ambrazevičius, R. (2023). Culture influences conscious appraisal of, but not automatic aversion to, acoustically rough musical intervals. _Plos One, 18(12)_, e0294645. [https://doi.org/10.1371/journal.pone.0294645](https://doi.org/10.1371/journal.pone.0294645)
+
 * Howell, D. C. (2010). _Statistical methods for psychology_. 7th ed.  Wadwsworth, Cengage Learning. 
+* Lahdelma, I. & Eerola, T. (2024). Valenced Priming with Acquired Affective Concepts in Music: Automatic Reactions to Common Tonal Chords. Music Perception, 41(3), 161-175. [https://doi.org/10.1525/mp.2024.41.3.161](https://doi.org/10.1525/mp.2024.41.3.161)
+
 * Lilja, D. J. & Linse, G. M. (2022). _Linear regression using R: An introduction to data modeling._  University of Minnesota Libraries Publishing. https://staging.open.umn.edu/opentextbooks/textbooks/linear-regression-using-r-an-introduction-to-data-modeling
 * McNulty, K. (2021). _Handbook of regression modeling in people analytics: With examples in R and Python._  Chapman and Hall/CRC. https://peopleanalytics-regression-book.org/index.html
 * Sheather, S. (2009). _A Modern Approach to Regression with R_. Springer Science & Business Media. https://link.springer.com/book/10.1007/978-0-387-09608-7
