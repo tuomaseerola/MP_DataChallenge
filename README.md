@@ -240,12 +240,11 @@ Before you will be able to run the analysis, you need to have a look at
 the data, and find out any quality issues and decide how to tackle them.
 
 > [!TIP]  
-> `expand` function (from `tidyr`) helps you to diagnose conditions (e.g.,
-> `data %>% expand(nesting(congruity, expertise))`). 
-> `table` function can also be useful (e.g. `table(data$expertise,data$congruity)`)
+> `expand` function (from `tidyr`) helps you to diagnose conditions. 
+> `table` function can also be useful.
 
 > [!IMPORTANT]  
-> Histograms are useful. 
+> Histograms are helpful. 
 > Reaction time data has a feasible range of values.
 
 ## Solutions
@@ -261,7 +260,7 @@ include figures in your solution.
 > in future, you need to specify all these steps (1. what are the steps
 > to data exclusion, 2. what are the preprocessing steps, and 3. what
 > are the specific analysis operations) in advance of the data
-> collection.
+> collection. It is good to learn to articulate the issues and solutions in advance of the data collection.
 
 ## References
 
