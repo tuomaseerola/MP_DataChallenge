@@ -34,23 +34,7 @@ extracted from music using MIR tools. We have a good dataset for this.
 ### Dataset: PMEmo – A Dataset For Music Emotion Computing
 
 Dataset is available at <https://github.com/HuiZhangDB/PMEmo> and fully
-at <http://huisblog.cn/PMEmo/> and this is the description by the
-authors:
-
-> PMEmo dataset contains emotion annotations of 794 songs as well as the
-> simultaneous electrodermal activity (EDA) signals. A Music Emotion
-> Experiment was well-designed for collecting the affective-annotated
-> music corpus of high quality, which recruited 457 subjects.
-
-> The dataset is publically available to the research community, which
-> is foremost intended for benchmarking in music emotion retrieval and
-> recognition. To straightforwardly evaluate the methodologies for music
-> affective analysis, it also involves pre-computed audio feature sets.
-> In addition to that, manually selected chorus excerpts (compressed in
-> MP3) of songs are provided to facilitate the development of
-> chorus-related research.
-
-For more details, see paper by [Zhang et al.,
+at <http://huisblog.cn/PMEmo/>. For more details, see paper by [Zhang et al.,
 (2018)](https://doi.org/10.1145/3206025.3206037).
 
 The data allows to explore various aspects of emotion induction,
@@ -116,49 +100,6 @@ knitr::kable(head(meta))
 | 7 | 7.mp3 | Girls Talk Boys | 5 Seconds Of Summer | Ghostbusters (Original Motion Picture Soundtrack) | 29.11 | 02:30 | 02:57 |
 | 8 | 8.mp3 | PRBLMS | 6LACK | FREE 6LACK | 40.14 | 02:10 | 02:48 |
 
-### Building a bad model
-
-The simplest model would be a linear regression predicting either
-arousal or valence using all features, and it could be done in R using
-(`lm`) in the following way:
-
-``` r
-bad_model <- lm(Arousal.mean. ~ ., 
-  data = dplyr::select(df,-musicId,-Valence.mean.)) # discard unwanted columns
-s <- summary(bad_model)
-print(round(s$r.squared,3))
-```
-
-    [1] 0.999
-
-This bad model is *pure nonsense* because it tries to predict 767
-ratings with 6373 predictors, and if you have more predictors than
-observations, you break any modelling assumptions and you will be
-explain all data even with random variables. As we can see, the model is
-“perfect” ($r^2$ = 0.999). To predict a variable, you need many more
-observations than predictors and the rule is to have 15 or 20 times more
-observations than predictors.
-
-Just to demonstrate this, here we predict arousal with 770 random
-features, which is equally “good” as the previous bad model.
-
-``` r
-n <- nrow(df); reps <- 770; n1 <- 1
-# create a data frame with 770 random variables 
-tmp<- as.data.frame(cbind(matrix(seq_len(n*n1), ncol=n1),
-      matrix(sample(0:1, n*reps, replace=TRUE), ncol=reps)))
-tmp$Arousal.mean. <- df$Arousal.mean. # add arousal to random data
-random_model <- lm(Arousal.mean. ~ .,data=tmp)
-s2 <- summary(random_model)
-print(round(s2$r.squared,3))
-```
-
-    [1] 1
-
-A perfect prediction obtained with noise! This illustrates that we need
-to be selective about the predictors as we can only afford to have a
-maximum of 30 predictors if using the rule of 20:1, but consider having
-only a handful predictors, if you want to be able to explain the model.
 
 ### Building a good model
 
@@ -223,8 +164,10 @@ related to this where we attempt to explain the electodermal activity
 with musical features or bring information from lyrics or metadata to
 the models.
 
-<img src="figures/MPL.png" data-fig-align="left" width="160" /> \###
-Postscriptum: Winner of the Challenge 1
+<img src="figures/MPL.png" data-fig-align="left" width="160" /> 
+
+
+### Postscriptum: Winner of the Challenge 1
 
 **Wei Wu** developed a mature modelling approach for this challenge,
 where he took those features that correlated with the ratings and
