@@ -178,6 +178,8 @@ analyses of the data. One of the takeaways was that the model
 development and evaluation needs to be kept separate from the start to
 avoid “peeking”.
 
+Congratulations to Wei! 👏🍾👏
+
 * * *
 
 # Music Psychology Data Challenge 2
