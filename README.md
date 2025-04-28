@@ -262,10 +262,16 @@ the data, and find out any quality issues and decide how to tackle them.
 ## Solutions
 
 It is all about learning. Again, submit your solutions as _Rmarkdown_
-notebook, preferably containing a section of **1. Dealing with errors**
-and **2. Analysis results**. In the first part, describe what you do and
-give a rationale of why you remove/alter any observations. You can
-include figures in your solution.
+notebook, preferably divided into two sections:
+
+#### 1. Dealing with errors
+
+In the first part, describe what you do and give a rationale of why you remove/alter any observations. You can
+include figures in your solution. 
+
+#### 2. Analysis results
+
+In the second part, you can present a statistical analysis that answers the question.
 
 > [!NOTE] 
 > If you want to engage with study **preregistrations**
