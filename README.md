@@ -297,22 +297,24 @@ Before you will be able to run the analysis, you need to have a look at
 the data, and find out any quality issues and decide how to tackle them.
 
 > [!TIP]  
-> \* `expand` function (from `tidyr`) helps you to diagnose (e.g.,
-> `data %>% expand(nesting(congruity, expertise))`). `table` function
-> can also be useful (e.g. `table(data$expertise,data$congruity)`) \*
-> Histograms are useful. \* Reaction time data has a feasible range of
-> values. \* There are 11 different types of errors and noise in the
-> data.
+> `expand` function (from `tidyr`) helps you to diagnose conditions (e.g.,
+> `data %>% expand(nesting(congruity, expertise))`). 
+> `table` function can also be useful (e.g. `table(data$expertise,data$congruity)`)
+
+> [!IMPORTANT]  
+> Histograms are useful. 
+> Reaction time data has a feasible range of values.
 
 ## Solutions
 
-It is all about learning. Again, submit your solutions as Rmarkdown
+It is all about learning. Again, submit your solutions as _Rmarkdown_
 notebook, preferably containing a section of **1. Dealing with errors**
 and **2. Analysis results**. In the first part, describe what you do and
 give a rationale of why you remove/alter any observations. You can
 include figures in your solution.
 
-> [!IMPORTANT] If you want to engage with study **preregistrations**
+> [!NOTE] 
+> If you want to engage with study **preregistrations**
 > in future, you need to specify all these steps (1. what are the steps
 > to data exclusion, 2. what are the preprocessing steps, and 3. what
 > are the specific analysis operations) in advance of the data
