@@ -197,31 +197,11 @@ How do you diagnose and deal with these?
 
 ## Priming data
 
-This dataset is from a priming study, where the participants have done
-quick binary judgements of negative and positive words (as either
-“negative” or “positive”). The words have been presented just after a
-sound stimulus (called “prime” in priming studies), which has been
-either positive or negative (say consonant or dissonant). A long-known
-fact is that processing incongruous stimuli takes more time than
-congruous, so the reaction time gives a window into this process, which
-is not under volitional control. It allows researchers to explore
-whether sound association are truly processed as negative/positive or
-are they just consciously rated so when rated with self-report scales
-(Armitage et al., 2020; Lahdelma et al., 2024).
+This dataset comes from a priming study, in which participants made quick binary judgements of words as either "negative" or "positive". The words were presented immediately after a sound stimulus (referred to as a "prime" in priming studies), which was either positive or negative (for example, consonant or dissonant sounds). It is a long-established finding that processing incongruous stimuli takes more time than processing congruous ones, so reaction time provides insight into this process, which is not under volitional control. This method allows researchers to explore whether sound associations are genuinely processed as negative or positive, or whether they are simply consciously rated as such when assessed using self-report scales (Armitage et al., 2020; Lahdelma et al., 2024).
 
 ### Dataset details
 
-This is a simple experiment. Each participants (*N* = 40) made decision
-about word valence in 64 trials (sound primes + word targets). These
-trials consisted of 8 positive and 8 negative words presented either
-congruously with the sound (positive sound and positive word or negative
-sound and negative word) or incongruously (negative sound and positive
-word or positive sound and negative word). The dependent variable is the
-reaction time (`reaction_time`) in milliseconds and the two main
-independent variables are `congruity` (which encodes whether the sound
-and word are either congruous or incongruous) and musical `expertise`
-(musician or non-musician). Some previous literature suggest that
-musicians tend to be more sensitive to these nuances in the sounds.
+This is a simple experiment. Each participant (*N* = 40) made a decision about word valence across 64 trials (sound primes + word targets). These trials consisted of 8 positive and 8 negative words, presented either congruously with the sound (positive sound and positive word, or negative sound and negative word) or incongruously (negative sound and positive word, or positive sound and negative word). The dependent variable is the reaction time (`reaction_time`) in milliseconds, and the two main independent variables are `congruity` (indicating whether the sound and word were congruous or incongruous) and musical `expertise` (musician or non-musician). Some previous literature suggests that musicians tend to be more sensitive to such nuances in sounds.
 
 This is what the data looks like.
 
@@ -239,17 +219,11 @@ knitr::kable(head(data))
 | 1 | 5 | Non-musician | congruent | 946.3 | TRUE | Pos | Pos | Pos_5 |
 | 1 | 6 | Non-musician | congruent | 951.1 | TRUE | Pos | Pos | Pos_6 |
 
-There are 2624 observations in the data, which is *not exactly correct*
-when there has been 40 participants each completing 64 trials (40 x 64 =
-2560). So the data has errors and noise on top of the fact that reaction
-times tend to be quite noisy as well.
+There are 2,624 observations in the dataset, which is not exactly correct given that 40 participants each completed 64 trials (40 × 64 = 2,560). This discrepancy suggests that the data contain some errors and noise, in addition to the inherent variability typically seen in reaction time measures.
 
 ## Challenge
 
-Was there a statistically significant effect of priming? And what about
-the expertise, was there an expertise difference in the reaction times?
-Before you will be able to run the analysis, you need to have a look at
-the data, and find out any quality issues and decide how to tackle them.
+Was there a statistically significant effect of priming? And was there a difference in reaction times based on expertise? Before conducting the analysis, you should first inspect the data to identify any quality issues and decide how to address them.
 
 > [!TIP]  
 > `expand` function (from `tidyr`) helps you to diagnose conditions. 
@@ -271,14 +245,10 @@ include figures in your solution.
 
 #### 2. Analysis results
 
-In the second part, you can present a statistical analysis that answers the question.
+In the second part, you can present a statistical analysis that answers the questions about the priming and expertise.
 
 > [!NOTE] 
-> If you want to engage with study **preregistrations**
-> in future, you need to specify all these steps (1. what are the steps
-> to data exclusion, 2. what are the preprocessing steps, and 3. what
-> are the specific analysis operations) in advance of the data
-> collection. It is good to learn to articulate the issues and solutions in advance of the data collection.
+> If you wish to engage with study **preregistrations** in future, you will need to specify all these steps in advance of data collection: (1) the criteria for data exclusion, (2) the preprocessing steps, and (3) the specific analysis procedures. It is important to learn to articulate potential issues and their solutions before collecting data.
 
 
 ### The Winner of the MP Data Challenge 2
