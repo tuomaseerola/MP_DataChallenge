@@ -1,10 +1,14 @@
-# Music Psychology Data challenge
+
+Contents
+- <A HREF="#challenge1">Music Psychology Data Challenge 1</A>
+- <A HREF="#challenge2">Music Psychology Data Challenge 2</A>
 
 
 <img src="figures/MP_data_challenge_smaller.png" data-fig-align="left"
 width="200" />
 
-# Music Psychology Data Challenge 1
+# Music Psychology Data Challenge 1 <div id="challenge1"></div>
+
 
 This is an internal training exercise for the *Durham Music and Science*
 *Music Psychology Lab*, where all members—working individually or in
@@ -182,7 +186,7 @@ Congratulations to Wei! 👏🍾👏
 
 * * *
 
-# Music Psychology Data Challenge 2
+# Music Psychology Data Challenge 2 <div id="challenge2"></div>
 
 The second music psychology data challenge is about noise and errors.
 How do you diagnose and deal with these?
