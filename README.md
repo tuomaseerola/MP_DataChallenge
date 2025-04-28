@@ -167,7 +167,7 @@ the models.
 <img src="figures/MPL.png" data-fig-align="left" width="160" /> 
 
 
-### Postscriptum: Winner of the Challenge 1
+### The Winner of the MP Data Challenge 1
 
 **Wei Wu** developed a mature modelling approach for this challenge,
 where he took those features that correlated with the ratings and
@@ -177,6 +177,8 @@ proper cross-validation. All submission managed to do meaningful
 analyses of the data. One of the takeaways was that the model
 development and evaluation needs to be kept separate from the start to
 avoid “peeking”.
+
+* * *
 
 # Music Psychology Data Challenge 2
 
@@ -261,6 +263,10 @@ include figures in your solution.
 > to data exclusion, 2. what are the preprocessing steps, and 3. what
 > are the specific analysis operations) in advance of the data
 > collection. It is good to learn to articulate the issues and solutions in advance of the data collection.
+
+
+### The Winner of the MP Data Challenge 2
+
 
 ## References
 
